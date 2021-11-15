@@ -1,4 +1,5 @@
-﻿using KNU.Crypto.SymmetricCiphers.Common.Interfaces;
+﻿using KNU.Crypto.SymmetricCiphers.Common.Extensions;
+using KNU.Crypto.SymmetricCiphers.Common.Interfaces;
 
 namespace KNU.Crypto.SymmetricCiphers.AES.Implementation
 {
@@ -9,37 +10,43 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Implementation
 
         }
 
-        public IState AddRoundKey(IBlock block)
+        public void AddRoundKey(byte[,] w, int round)
+        {
+            for (int i = 0; i < Rows; ++i)
+            {
+                for (int j = 0; j < Columns; ++j)
+                {
+                    bytes[i, j] = bytes[i, j].Xor(w[round * Columns + j, i]);
+                }
+            }
+        }
+
+        public void InvMixColumns()
         {
             throw new System.NotImplementedException();
         }
 
-        public IState InvMixColumns()
+        public void InvShiftRows()
         {
             throw new System.NotImplementedException();
         }
 
-        public IState InvShiftRows()
+        public void InvSubBytes()
         {
             throw new System.NotImplementedException();
         }
 
-        public IState InvSubBytes()
+        public void MixColumns()
         {
             throw new System.NotImplementedException();
         }
 
-        public IState MixColumns()
+        public void ShiftRows()
         {
             throw new System.NotImplementedException();
         }
 
-        public IState ShiftRows()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IState SubBytes()
+        public void SubBytes()
         {
             throw new System.NotImplementedException();
         }

@@ -4,6 +4,10 @@
     {
         byte[,] Bytes { get; }
 
+        int Rows { get; }
+
+        int Columns { get; }
+
         IBlock XOR(IBlock block);
     }
 }

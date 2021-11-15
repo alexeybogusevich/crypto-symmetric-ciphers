@@ -28,7 +28,7 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Implementation
         private readonly byte[] key;
 
         /// <summary>
-        /// Values derived from the Cipher Key using the Key Expansion routine.
+        /// Values derived from the Cipher Key using the Key Expansion routine. Key schedule.
         /// </summary>
         private byte[,] w;
 
@@ -61,6 +61,8 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Implementation
         public byte[] Encode(byte[] plainBytes)
         {
             var state = new State(plainBytes, 4, Nb);
+
+            state.AddRoundKey(w, 0);
 
 
 

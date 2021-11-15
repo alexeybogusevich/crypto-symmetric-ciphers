@@ -17,7 +17,10 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Implementation
             }
         }
 
-        public byte[,] Bytes { get => bytes; }
+        public byte[,] Bytes => bytes;
+
+        public int Rows => bytes.GetLength(0);
+        public int Columns => bytes.GetLength(1);
 
         public IBlock XOR(IBlock block)
         {

@@ -2,18 +2,18 @@
 {
     public interface IState 
     {
-        IState AddRoundKey(IBlock block);
+        void AddRoundKey(byte[,] w, int round);
 
-        IState SubBytes();
+        void SubBytes();
 
-        IState InvSubBytes();
+        void InvSubBytes();
 
-        IState ShiftRows();
+        void ShiftRows();
 
-        IState InvShiftRows();
+        void InvShiftRows();
 
-        IState MixColumns();
+        void MixColumns();
 
-        IState InvMixColumns();
+        void InvMixColumns();
     }
 }
