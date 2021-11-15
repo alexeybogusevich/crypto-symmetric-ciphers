@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KNU.Crypto.SymmetricCiphers", "KNU.Crypto.SymmetricCiphers\KNU.Crypto.SymmetricCiphers.csproj", "{12ED6139-38C8-4FB7-ABF6-E36C05B7B528}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KNU.Crypto.SymmetricCiphers.AES", "KNU.Crypto.SymmetricCiphers.AES\KNU.Crypto.SymmetricCiphers.AES.csproj", "{FB4B17FA-2215-4A58-AD08-652745101BA3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KNU.Crypto.SymmetricCiphers.Kalyna", "KNU.Crypto.SymmetricCiphers.Kalyna\KNU.Crypto.SymmetricCiphers.Kalyna.csproj", "{F3FB058E-B075-47A0-9045-361BC348CFC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KNU.Crypto.SymmetricCiphers.Common", "KNU.Crypto.SymmetricCiphers.Common\KNU.Crypto.SymmetricCiphers.Common.csproj", "{28C79F6D-3CC3-4F22-807A-8E83261A9750}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12ED6139-38C8-4FB7-ABF6-E36C05B7B528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12ED6139-38C8-4FB7-ABF6-E36C05B7B528}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12ED6139-38C8-4FB7-ABF6-E36C05B7B528}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12ED6139-38C8-4FB7-ABF6-E36C05B7B528}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB4B17FA-2215-4A58-AD08-652745101BA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB4B17FA-2215-4A58-AD08-652745101BA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB4B17FA-2215-4A58-AD08-652745101BA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB4B17FA-2215-4A58-AD08-652745101BA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3FB058E-B075-47A0-9045-361BC348CFC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3FB058E-B075-47A0-9045-361BC348CFC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3FB058E-B075-47A0-9045-361BC348CFC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3FB058E-B075-47A0-9045-361BC348CFC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28C79F6D-3CC3-4F22-807A-8E83261A9750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28C79F6D-3CC3-4F22-807A-8E83261A9750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28C79F6D-3CC3-4F22-807A-8E83261A9750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28C79F6D-3CC3-4F22-807A-8E83261A9750}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {870D4F8B-ECFC-4F5C-9967-56D71B4E251C}
+	EndGlobalSection
+EndGlobal
