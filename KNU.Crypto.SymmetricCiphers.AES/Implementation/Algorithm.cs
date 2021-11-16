@@ -65,39 +65,39 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Implementation
         {
             var state = new State(plainBytes, 4, Nb);
 
-            Console.WriteLine(nameof(State.AddRoundKey));
             state.AddRoundKey(w, 0);
+            Console.WriteLine(nameof(State.AddRoundKey));
             Console.WriteLine(state);
 
             for (int round = 1; round < Nr; ++round)
             {
-                Console.WriteLine(nameof(State.SubBytes));
                 state.SubBytes();
+                Console.WriteLine(nameof(State.SubBytes));
                 Console.WriteLine(state);
 
-                Console.WriteLine(nameof(State.ShiftRows));
                 state.ShiftRows();
+                Console.WriteLine(nameof(State.ShiftRows));
                 Console.WriteLine(state);
 
-                Console.WriteLine(nameof(State.MixColumns));
                 state.MixColumns();
+                Console.WriteLine(nameof(State.MixColumns));
                 Console.WriteLine(state);
 
-                Console.WriteLine(nameof(State.AddRoundKey));
                 state.AddRoundKey(w, round);
+                Console.WriteLine(nameof(State.AddRoundKey));
                 Console.WriteLine(state);
             }
 
-            Console.WriteLine(nameof(State.SubBytes));
             state.SubBytes();
+            Console.WriteLine(nameof(State.SubBytes));
             Console.WriteLine(state);
 
-            Console.WriteLine(nameof(State.ShiftRows));
             state.ShiftRows();
+            Console.WriteLine(nameof(State.ShiftRows));
             Console.WriteLine(state);
 
-            Console.WriteLine(nameof(State.AddRoundKey));
             state.AddRoundKey(w, Nr);
+            Console.WriteLine(nameof(State.AddRoundKey));
             Console.WriteLine(state);
 
             return state.ToByteArray();
@@ -107,39 +107,39 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Implementation
         {
             var state = new State(cipherBytes, 4, Nb);
 
-            Console.WriteLine(nameof(State.AddRoundKey));
             state.AddRoundKey(w, Nr);
+            Console.WriteLine(nameof(State.AddRoundKey));
             Console.WriteLine(state);
 
             for (int round = Nr - 1; round > 1; --round)
             {
-                Console.WriteLine(nameof(State.InvShiftRows));
                 state.InvShiftRows();
+                Console.WriteLine(nameof(State.InvShiftRows));
                 Console.WriteLine(state);
 
-                Console.WriteLine(nameof(State.InvSubBytes));
                 state.InvSubBytes();
+                Console.WriteLine(nameof(State.InvSubBytes));
                 Console.WriteLine(state);
 
-                Console.WriteLine(nameof(State.AddRoundKey));
                 state.AddRoundKey(w, round);
+                Console.WriteLine(nameof(State.AddRoundKey));
                 Console.WriteLine(state);
 
-                Console.WriteLine(nameof(State.InvMixColumns));
                 state.InvMixColumns();
+                Console.WriteLine(nameof(State.InvMixColumns));
                 Console.WriteLine(state);
             }
 
-            Console.WriteLine(nameof(State.InvShiftRows));
             state.InvShiftRows();
+            Console.WriteLine(nameof(State.InvShiftRows));
             Console.WriteLine(state);
 
-            Console.WriteLine(nameof(State.InvSubBytes));
             state.InvSubBytes();
+            Console.WriteLine(nameof(State.InvSubBytes));
             Console.WriteLine(state);
 
-            Console.WriteLine(nameof(State.AddRoundKey));
             state.AddRoundKey(w, 0);
+            Console.WriteLine(nameof(State.AddRoundKey));
             Console.WriteLine(state);
 
             return state.ToByteArray();
