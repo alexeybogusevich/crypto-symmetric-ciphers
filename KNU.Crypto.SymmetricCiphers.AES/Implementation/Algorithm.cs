@@ -1,4 +1,5 @@
 ﻿using KNU.Crypto.SymmetricCiphers.AES.Data;
+using KNU.Crypto.SymmetricCiphers.AES.Extensions;
 using KNU.Crypto.SymmetricCiphers.Common.Extensions;
 using KNU.Crypto.SymmetricCiphers.Common.Interfaces;
 using System;
@@ -64,14 +65,40 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Implementation
 
             state.AddRoundKey(w, 0);
 
+            for (int round = 1; round < Nr; ++round)
+            {
+                state.SubBytes();
+                state.ShiftRows();
+                state.MixColumns();
+                state.AddRoundKey(w, round);
+            }
 
+            state.SubBytes();
+            state.ShiftRows();
+            state.AddRoundKey(w, Nr);
 
-            throw new NotImplementedException();
+            return state.ToByteArray();
         }
 
         public byte[] Decode(byte[] cipherBytes)
         {
-            throw new NotImplementedException();
+            var state = new State(cipherBytes, 4, Nb);
+
+            state.AddRoundKey(w, Nr);
+
+            for (int round = Nr - 1; round > 1; --round)
+            {
+                state.InvShiftRows();
+                state.InvSubBytes();
+                state.AddRoundKey(w, round);
+                state.InvMixColumns();
+            }
+
+            state.InvShiftRows();
+            state.InvSubBytes();
+            state.AddRoundKey(w, 0);
+
+            return state.ToByteArray();
         }
 
         private void KeyExpansion(byte[] key)

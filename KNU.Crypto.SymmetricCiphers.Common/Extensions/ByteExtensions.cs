@@ -40,21 +40,21 @@ namespace KNU.Crypto.SymmetricCiphers.Common.Extensions
 
             foreach (var _ in Enumerable.Range(0, 8))
             {
-                if ((b & 1) != 0)
+                if (b.And(1) != 0)
                 {
-                    p ^= a;
+                    p = p.Xor(a);
                 }
 
-                bool isReduced = (a & 0x80) != 0;
+                bool isReduced = a.And(0x80) != 0;
 
-                a <<= 1;
+                a = a.LeftShift(1);
 
                 if (isReduced)
                 {
-                    a ^= 0x1B;
+                    a = a.Xor(0x1B);
                 }
 
-                b >>= 1;
+                b = b.RightShift(1);
             }
 
             return p;
