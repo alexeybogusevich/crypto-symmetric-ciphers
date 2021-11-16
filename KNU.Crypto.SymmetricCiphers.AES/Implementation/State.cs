@@ -1,6 +1,7 @@
 ﻿using KNU.Crypto.SymmetricCiphers.AES.Data;
 using KNU.Crypto.SymmetricCiphers.Common.Extensions;
 using KNU.Crypto.SymmetricCiphers.Common.Interfaces;
+using System.Text;
 
 namespace KNU.Crypto.SymmetricCiphers.AES.Implementation
 {
@@ -133,6 +134,23 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Implementation
                     .Xor(bytesCopy[2, c].GMul(0x09))
                     .Xor(bytesCopy[3, c].GMul(0x0e));
             }
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder().AppendLine();
+
+            for (int r = 0; r < Rows; ++r)
+            {
+                for (int c = 0; c < Columns; ++c)
+                {
+                    sb.Append($"{bytes[r, c].ToString("X2")} ");
+                }
+
+                sb.AppendLine();
+            }
+
+            return sb.ToString();
         }
     }
 }

@@ -5,4 +5,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\KNU.Crypto.SymmetricCiphers.AES\KNU.Crypto.SymmetricCiphers.AES.csproj" />
+  </ItemGroup>
+
 </Project>
