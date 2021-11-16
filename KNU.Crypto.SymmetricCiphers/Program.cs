@@ -17,7 +17,7 @@ namespace KNU.Crypto.SymmetricCiphers
             //var plainText = RandomManager.NextString(plainTextLength);
             //var plainBytes = Encoding.Unicode.GetBytes(plainText);
 
-            var plainBytes = Examples.AppendixB_PlainText;
+            var plainBytes = Examples.AppendixC1_PlainText;
             var plainText = Encoding.ASCII.GetString(plainBytes);
 
             Console.WriteLine($"PLAIN: {plainText}");
@@ -25,7 +25,7 @@ namespace KNU.Crypto.SymmetricCiphers
             //var cipherKeyLength = AESKeyBitsLength / (sizeof(byte) * 8);
             //var cipherKey = RandomManager.NextBytes(cipherKeyLength);
 
-            var cipherKey = Examples.AppendixB_CipherKey;
+            var cipherKey = Examples.AppendixC1_CipherKey;
 
             var algorithm = new Algorithm(cipherKey);
 

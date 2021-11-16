@@ -64,6 +64,7 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Implementation
         public byte[] Encode(byte[] plainBytes)
         {
             var state = new State(plainBytes, 4, Nb);
+            Console.WriteLine(state);
 
             state.AddRoundKey(w, 0);
             Console.WriteLine(nameof(State.AddRoundKey));
@@ -106,12 +107,13 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Implementation
         public byte[] Decode(byte[] cipherBytes)
         {
             var state = new State(cipherBytes, 4, Nb);
+            Console.WriteLine(state);
 
             state.AddRoundKey(w, Nr);
             Console.WriteLine(nameof(State.AddRoundKey));
             Console.WriteLine(state);
 
-            for (int round = Nr - 1; round > 1; --round)
+            for (int round = Nr - 1; round > 0; --round)
             {
                 state.InvShiftRows();
                 Console.WriteLine(nameof(State.InvShiftRows));
