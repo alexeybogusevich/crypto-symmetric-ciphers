@@ -76,7 +76,7 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Implementation
                     bytesCopy[0, c].GMul(0x03)
                     .Xor(bytesCopy[1, c])
                     .Xor(bytesCopy[2, c])
-                    .Xor(bytesCopy[3, c].Xor(0x02));
+                    .Xor(bytesCopy[3, c].GMul(0x02));
             }
         }
 
