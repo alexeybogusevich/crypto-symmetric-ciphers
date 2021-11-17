@@ -8,10 +8,7 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Implementation
 {
     public class State : Block, IState
     {
-        public State(byte[] bytes, int rows, int columns) : base(bytes, rows, columns)
-        {
-
-        }
+        public State(byte[] bytes, int rows, int columns) : base(bytes, rows, columns) { }
 
         public void AddRoundKey(byte[,] w, int round)
         {

@@ -1,4 +1,4 @@
-﻿namespace KNU.Crypto.SymmetricCiphers.AES.Implementation
+﻿namespace KNU.Crypto.SymmetricCiphers.AES.Parameters
 {
     public enum KeySize
     {
