@@ -1,5 +1,4 @@
-﻿using KNU.Crypto.SymmetricCiphers.AES.Data;
-using KNU.Crypto.SymmetricCiphers.AES.Implementation;
+﻿using KNU.Crypto.SymmetricCiphers.AES.Implementation;
 using KNU.Crypto.SymmetricCiphers.Common.Services;
 using System;
 using System.Text;
@@ -13,19 +12,14 @@ namespace KNU.Crypto.SymmetricCiphers
 
         static void Main(string[] args)
         {
-            //var plainTextLength = AESTextBitsLength / (sizeof(char) * 8);
-            //var plainText = RandomManager.NextString(plainTextLength);
-            //var plainBytes = Encoding.Unicode.GetBytes(plainText);
-
-            var plainBytes = Examples.AppendixC1_PlainText;
-            var plainText = Encoding.ASCII.GetString(plainBytes);
+            var plainTextLength = AESTextBitsLength / (sizeof(char) * 8);
+            var plainText = RandomManager.NextString(plainTextLength);
+            var plainBytes = Encoding.Unicode.GetBytes(plainText);
 
             Console.WriteLine($"PLAIN: {plainText}");
 
-            //var cipherKeyLength = AESKeyBitsLength / (sizeof(byte) * 8);
-            //var cipherKey = RandomManager.NextBytes(cipherKeyLength);
-
-            var cipherKey = Examples.AppendixC1_CipherKey;
+            var cipherKeyLength = AESKeyBitsLength / (sizeof(byte) * 8);
+            var cipherKey = RandomManager.NextBytes(cipherKeyLength);
 
             var algorithm = new Algorithm(cipherKey);
 
