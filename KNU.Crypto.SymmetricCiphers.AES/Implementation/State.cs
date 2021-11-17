@@ -1,6 +1,7 @@
 ﻿using KNU.Crypto.SymmetricCiphers.AES.Data;
 using KNU.Crypto.SymmetricCiphers.Common.Extensions;
 using KNU.Crypto.SymmetricCiphers.Common.Interfaces;
+using KNU.Crypto.SymmetricCiphers.Common.Models;
 using System.Text;
 
 namespace KNU.Crypto.SymmetricCiphers.AES.Implementation

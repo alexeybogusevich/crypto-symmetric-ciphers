@@ -1,6 +1,6 @@
 ﻿using KNU.Crypto.SymmetricCiphers.Common.Interfaces;
 
-namespace KNU.Crypto.SymmetricCiphers.AES.Extensions
+namespace KNU.Crypto.SymmetricCiphers.Common.Extensions
 {
     public static class BlockExtensions
     {

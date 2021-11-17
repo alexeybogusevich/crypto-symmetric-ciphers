@@ -1,5 +1,4 @@
 ﻿using KNU.Crypto.SymmetricCiphers.AES.Data;
-using KNU.Crypto.SymmetricCiphers.AES.Extensions;
 using KNU.Crypto.SymmetricCiphers.Common.Extensions;
 using KNU.Crypto.SymmetricCiphers.Common.Interfaces;
 using System;
