@@ -1,10 +1,9 @@
-﻿using KNU.Crypto.SymmetricCiphers.Common.Interfaces;
-using KNU.Crypto.SymmetricCiphers.Kalyna.Parameters;
+﻿using KNU.Crypto.SymmetricCiphers.Kalyna.Parameters;
 using System;
 
 namespace KNU.Crypto.SymmetricCiphers.Kalyna.Implementation
 {
-    public class Algorithm : IAlgorithm
+    public class Algorithm
     {
         /// <summary>
         /// Number of columns (32-bit words) comprising the State. For this standard, Nb = 4. 
@@ -31,37 +30,97 @@ namespace KNU.Crypto.SymmetricCiphers.Kalyna.Implementation
         /// </summary>
         private byte[,] w;
 
-        public Algorithm(byte[] key)
+        public Algorithm(BlockSize blockSize, KeySize keySize)
         {
-            var bitLength = key.Length * 8;
-
-            switch ((KeySize)bitLength)
+            switch (blockSize)
             {
-                case KeySize.Bits128:
-                    Nk = 2;
-                    Nr = 10; 
+                case BlockSize.Bits128:
+                    Nb = 2;
+                    if (keySize == KeySize.Bits128)
+                    {
+                        Nk = 2;
+                        Nr = 10;
+                    }
+                    else if (keySize == KeySize.Bits256)
+                    {
+                        Nk = 4;
+                        Nr = 14;
+                    }
+                    else
+                    {
+                        throw new ArgumentNullException($"{nameof(KeySize)} not supported.");
+                    }
                     break;
-                case KeySize.Bits256:
-                    Nk = 4;
-                    Nr = 14;
+                case BlockSize.Bits256:
+                    Nb = 4;
+                    if (keySize == KeySize.Bits256)
+                    {
+                        Nk = 4;
+                        Nr = 14;
+                    }
+                    else if (keySize == KeySize.Bits512)
+                    {
+                        Nk = 8;
+                        Nr = 18;
+                    }
+                    else
+                    {
+                        throw new ArgumentNullException($"{nameof(KeySize)} not supported.");
+                    }
                     break;
-                case KeySize.Bits512:
-                    Nk = 8;
-                    Nr = 18;
+                case BlockSize.Bits512:
+                    if (keySize == KeySize.Bits512)
+                    {
+                        Nk = 8;
+                        Nr = 18;
+                    }
                     break;
                 default:
-                    throw new ArgumentException($"{nameof(KeySize)} not supported: {key.Length}");
+                    throw new ArgumentNullException($"{nameof(BlockSize)} not supported.");
             }
         }
 
-        public byte[] Encode(byte[] plainBytes)
+        public ulong[] Encode(ulong[] plainText, ulong[] chipherKey)
         {
-            throw new NotImplementedException();
+            int round = 0;
+
+            ulong[] state = new ulong[Nb];
+
+            ulong[][] roundKeys = Bucket.KeyExpansion(chipherKey, ref state, Nb, Nk, Nr);
+
+            Array.Copy(plainText, state, Nb);
+
+            Bucket.AddRoundKey(roundKeys[round], state);
+            for (round = 1; round < Nr; ++round)
+            {
+                Bucket.EncipherRound(ref state);
+                Bucket.XorRoundKey(roundKeys[round], state);
+            }
+            Bucket.EncipherRound(ref state);
+            Bucket.AddRoundKey(roundKeys[Nr], state);
+
+            return state;
         }
 
-        public byte[] Decode(byte[] cipherBytes)
+        public ulong[] Decode(ulong[] chipherText, ulong[] chipherKey)
         {
-            throw new NotImplementedException();
+            var round = Nr;
+            ulong[] state = new ulong[Nb];
+
+            ulong[][] roundKeys = Bucket.KeyExpansion(chipherKey, ref state, Nb, Nk, Nr);
+
+            Array.Copy(chipherText, state, Nb);
+
+            Bucket.SubRoundKey(roundKeys[round], state);
+            for (round = Nr - 1; round > 0; --round)
+            {
+                Bucket.DecipherRound(ref state);
+                Bucket.XorRoundKey(roundKeys[round], state);
+            }
+            Bucket.DecipherRound(ref state);
+            Bucket.SubRoundKey(roundKeys[0], state);
+
+            return state;
         }
 
         private bool CheckBlock(BlockSize blockSize)
