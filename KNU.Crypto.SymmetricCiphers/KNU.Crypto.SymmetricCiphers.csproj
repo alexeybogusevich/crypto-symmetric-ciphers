@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KNU.Crypto.SymmetricCiphers.AES\KNU.Crypto.SymmetricCiphers.AES.csproj" />
+    <ProjectReference Include="..\KNU.Crypto.SymmetricCiphers.Kalyna\KNU.Crypto.SymmetricCiphers.Kalyna.csproj" />
   </ItemGroup>
 
 </Project>

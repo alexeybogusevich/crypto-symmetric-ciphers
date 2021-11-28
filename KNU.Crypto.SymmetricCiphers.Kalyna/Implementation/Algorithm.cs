@@ -86,18 +86,18 @@ namespace KNU.Crypto.SymmetricCiphers.Kalyna.Implementation
 
             ulong[] state = new ulong[Nb];
 
-            ulong[][] roundKeys = Bucket.KeyExpansion(chipherKey, ref state, Nb, Nk, Nr);
+            ulong[][] roundKeys = StateManager.KeyExpansion(chipherKey, ref state, Nb, Nk, Nr);
 
             Array.Copy(plainText, state, Nb);
 
-            Bucket.AddRoundKey(roundKeys[round], state);
+            StateManager.AddRoundKey(roundKeys[round], state);
             for (round = 1; round < Nr; ++round)
             {
-                Bucket.EncipherRound(ref state);
-                Bucket.XorRoundKey(roundKeys[round], state);
+                StateManager.EncipherRound(ref state);
+                StateManager.XorRoundKey(roundKeys[round], state);
             }
-            Bucket.EncipherRound(ref state);
-            Bucket.AddRoundKey(roundKeys[Nr], state);
+            StateManager.EncipherRound(ref state);
+            StateManager.AddRoundKey(roundKeys[Nr], state);
 
             return state;
         }
@@ -107,18 +107,18 @@ namespace KNU.Crypto.SymmetricCiphers.Kalyna.Implementation
             var round = Nr;
             ulong[] state = new ulong[Nb];
 
-            ulong[][] roundKeys = Bucket.KeyExpansion(chipherKey, ref state, Nb, Nk, Nr);
+            ulong[][] roundKeys = StateManager.KeyExpansion(chipherKey, ref state, Nb, Nk, Nr);
 
             Array.Copy(chipherText, state, Nb);
 
-            Bucket.SubRoundKey(roundKeys[round], state);
+            StateManager.SubRoundKey(roundKeys[round], state);
             for (round = Nr - 1; round > 0; --round)
             {
-                Bucket.DecipherRound(ref state);
-                Bucket.XorRoundKey(roundKeys[round], state);
+                StateManager.DecipherRound(ref state);
+                StateManager.XorRoundKey(roundKeys[round], state);
             }
-            Bucket.DecipherRound(ref state);
-            Bucket.SubRoundKey(roundKeys[0], state);
+            StateManager.DecipherRound(ref state);
+            StateManager.SubRoundKey(roundKeys[0], state);
 
             return state;
         }

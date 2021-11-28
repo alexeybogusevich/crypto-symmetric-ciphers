@@ -4,7 +4,7 @@ using System;
 
 namespace KNU.Crypto.SymmetricCiphers.Kalyna.Implementation
 {
-    public class Bucket
+    public class StateManager
     {
         public static void SubBytes(ulong[] state, int nb)
         {
