@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KNU.Crypto.SymmetricCiphers
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KNU.Crypto.SymmetricCiphers.AES.Tests", "KNU.Crypto.SymmetricCiphers.AES.Tests\KNU.Crypto.SymmetricCiphers.AES.Tests.csproj", "{C0DA7712-80AA-4C61-B955-A7DFB6B4CB9D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KNU.Crypto.SymmetricCiphers.Benchmarks", "KNU.Crypto.SymmetricCiphers.Benchmarks\KNU.Crypto.SymmetricCiphers.Benchmarks.csproj", "{B9763C4C-14BE-4767-AE67-84335675B9AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C0DA7712-80AA-4C61-B955-A7DFB6B4CB9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0DA7712-80AA-4C61-B955-A7DFB6B4CB9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0DA7712-80AA-4C61-B955-A7DFB6B4CB9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9763C4C-14BE-4767-AE67-84335675B9AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9763C4C-14BE-4767-AE67-84335675B9AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9763C4C-14BE-4767-AE67-84335675B9AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9763C4C-14BE-4767-AE67-84335675B9AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
