@@ -1,139 +1,140 @@
-﻿using KNU.Crypto.SymmetricCiphers.Kalyna.Parameters;
-using System;
+﻿using KNU.Crypto.SymmetricCiphers.Kalyna.Data;
+using System.Collections.Generic;
 
 namespace KNU.Crypto.SymmetricCiphers.Kalyna.Implementation
 {
     public class Algorithm
     {
-        /// <summary>
-        /// Number of columns (32-bit words) comprising the State. For this standard, Nb = 4. 
-        /// </summary>
-        private readonly int Nb = 4;
+        private List<State> RoundKeys { get; } = new List<State>();
 
-        /// <summary>
-        /// Number of 32-bit words comprising the Cipher Key. For this standard, Nk = 4, 6, or 8.
-        /// </summary>
-        private readonly int Nk;
-
-        /// <summary>
-        /// Number of rounds, which is a function of Nk and Nb (which is fixed). For this standard, Nr = 10, 12, or 14.
-        /// </summary>
-        private readonly int Nr;
-
-        /// <summary>
-        /// Cipher Key.
-        /// </summary>
-        private readonly byte[] key;
-
-        /// <summary>
-        /// Values derived from the Cipher Key using the Key Expansion routine. Key schedule.
-        /// </summary>
-        private byte[,] w;
-
-        public Algorithm(BlockSize blockSize, KeySize keySize)
+        public byte[] Encrypt(byte[] plainBytes, byte[] cipherKey)
         {
-            switch (blockSize)
+            if (RoundKeys.Count == 0)
+                KeyExpansion(cipherKey);
+
+            var state = new State(plainBytes);
+            state.AddRoundKey(RoundKeys[0].Bytes);
+
+            for (int i = 1; i <= 9; i++)
             {
-                case BlockSize.Bits128:
-                    Nb = 2;
-                    if (keySize == KeySize.Bits128)
-                    {
-                        Nk = 2;
-                        Nr = 10;
-                    }
-                    else if (keySize == KeySize.Bits256)
-                    {
-                        Nk = 4;
-                        Nr = 14;
-                    }
-                    else
-                    {
-                        throw new ArgumentNullException($"{nameof(KeySize)} not supported.");
-                    }
-                    break;
-                case BlockSize.Bits256:
-                    Nb = 4;
-                    if (keySize == KeySize.Bits256)
-                    {
-                        Nk = 4;
-                        Nr = 14;
-                    }
-                    else if (keySize == KeySize.Bits512)
-                    {
-                        Nk = 8;
-                        Nr = 18;
-                    }
-                    else
-                    {
-                        throw new ArgumentNullException($"{nameof(KeySize)} not supported.");
-                    }
-                    break;
-                case BlockSize.Bits512:
-                    if (keySize == KeySize.Bits512)
-                    {
-                        Nk = 8;
-                        Nr = 18;
-                    }
-                    break;
-                default:
-                    throw new ArgumentNullException($"{nameof(BlockSize)} not supported.");
+                state.SubBytes(Tables.Π);
+                state.ShiftRows();
+                state.MixColumns(Tables.Mds);
+                state.Xor(RoundKeys[i].Bytes);
             }
+
+            state.SubBytes(Tables.Π);
+            state.ShiftRows();
+            state.MixColumns(Tables.Mds);
+            state.AddRoundKey(RoundKeys[10].Bytes);
+
+            return state.Bytes.ToArray();
         }
 
-        public ulong[] Encode(ulong[] plainText, ulong[] chipherKey)
+        public byte[] Decrypt(byte[] plainBytes, byte[] cipherKey)
         {
-            int round = 0;
+            if (RoundKeys.Count == 0)
+                KeyExpansion(cipherKey);
 
-            ulong[] state = new ulong[Nb];
+            var state = new State(plainBytes);
 
-            ulong[][] roundKeys = StateManager.KeyExpansion(chipherKey, ref state, Nb, Nk, Nr);
+            state.SubRoundKey(RoundKeys[10].Bytes);
+            state.MixColumns(Tables.MdsRev);
+            state.ShiftRowsRev();
+            state.SubBytes(Tables.ΠRev);
 
-            Array.Copy(plainText, state, Nb);
-
-            StateManager.AddRoundKey(roundKeys[round], state);
-            for (round = 1; round < Nr; ++round)
+            for (int i = 9; 1 <= i; --i)
             {
-                StateManager.EncipherRound(ref state);
-                StateManager.XorRoundKey(roundKeys[round], state);
+                state.Xor(RoundKeys[i].Bytes);
+                state.MixColumns(Tables.MdsRev);
+                state.ShiftRowsRev();
+                state.SubBytes(Tables.ΠRev);
             }
-            StateManager.EncipherRound(ref state);
-            StateManager.AddRoundKey(roundKeys[Nr], state);
 
-            return state;
+            state.SubRoundKey(RoundKeys[0].Bytes);
+
+            return state.Bytes.ToArray();
         }
 
-        public ulong[] Decode(ulong[] chipherText, ulong[] chipherKey)
+        private State GenerateKt(byte[] key)
         {
-            var round = Nr;
-            ulong[] state = new ulong[Nb];
-
-            ulong[][] roundKeys = StateManager.KeyExpansion(chipherKey, ref state, Nb, Nk, Nr);
-
-            Array.Copy(chipherText, state, Nb);
-
-            StateManager.SubRoundKey(roundKeys[round], state);
-            for (round = Nr - 1; round > 0; --round)
+            var kt = new State
             {
-                StateManager.DecipherRound(ref state);
-                StateManager.XorRoundKey(roundKeys[round], state);
-            }
-            StateManager.DecipherRound(ref state);
-            StateManager.SubRoundKey(roundKeys[0], state);
-
-            return state;
-        }
-
-        private bool CheckBlock(BlockSize blockSize)
-        {
-            var keySize = (KeySize)key.Length;
-
-            return blockSize switch
-            {
-                BlockSize.Bits128 => keySize == KeySize.Bits128 || keySize == KeySize.Bits256,
-                BlockSize.Bits256 => keySize == KeySize.Bits256 || keySize == KeySize.Bits512,
-                BlockSize.Bits512 => keySize == KeySize.Bits512,
-                _ => throw new ArgumentException($"{nameof(BlockSize)} not supported: {blockSize}"),
+                Bytes = new List<byte>
+                {
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5
+                }
             };
+
+            kt.AddRoundKey(key);
+
+            kt.SubBytes(Tables.Π);
+
+            kt.ShiftRows();
+
+            kt.MixColumns(Tables.Mds);
+
+            kt.Xor(key);
+
+            kt.SubBytes(Tables.Π);
+
+            kt.ShiftRows();
+
+            kt.MixColumns(Tables.Mds);
+
+            kt.AddRoundKey(key);
+
+            kt.SubBytes(Tables.Π);
+
+            kt.ShiftRows();
+
+            kt.MixColumns(Tables.Mds);
+
+            return kt;
+        }
+
+        private IEnumerable<State> KeyExpansion(byte[] key)
+        {
+            for (int i = 0; i <= 10; i++)
+                RoundKeys.Add(new State());
+
+            var kt = GenerateKt(key);
+
+            for (int i = 0; i <= 10; i += 2)
+            {
+                var roundKey = RoundKeys[i];
+                roundKey.Bytes = new List<byte>(Tables.V);
+                roundKey.ShiftLeft(i / 2);
+
+                var keyCopy = new State(key);
+                keyCopy.RotateRight(32 * i);
+
+                roundKey.AddRoundKey(kt.Bytes);
+                var copy = new State(roundKey.Bytes);
+
+                roundKey.AddRoundKey(keyCopy.Bytes);
+
+                roundKey.SubBytes(Tables.Π);
+                roundKey.ShiftRows();
+                roundKey.MixColumns(Tables.Mds);
+
+                roundKey.Xor(copy.Bytes);
+
+                roundKey.SubBytes(Tables.Π);
+                roundKey.ShiftRows();
+                roundKey.MixColumns(Tables.Mds);
+
+                roundKey.AddRoundKey(copy.Bytes);
+                RoundKeys[i] = roundKey;
+            }
+
+            for (var i = 1; i <= 9; i += 2)
+            {
+                RoundKeys[i].Bytes = RoundKeys[i - 1].Bytes;
+                RoundKeys[i].RotateLeft(56);
+            }
+
+            return RoundKeys;
         }
     }
 }
