@@ -2,8 +2,8 @@
 {
     public interface IAlgorithm
     {
-        byte[] Encode(byte[] plainBytes);
+        byte[] Encrypt(byte[] plainBytes);
 
-        byte[] Decode(byte[] cipherBytes);
+        byte[] Decrypt(byte[] cipherBytes);
     }
 }

@@ -22,15 +22,15 @@ namespace KNU.Crypto.SymmetricCiphers
 
             var algorithm = new Algorithm(cipherBytes);
 
-            var encodedBytes = algorithm.Encode(plainBytes);
-            var encodedText = Encoding.Unicode.GetString(encodedBytes);
+            var encrypted = algorithm.Encrypt(plainBytes);
+            var encryptedText = Encoding.Unicode.GetString(encrypted);
 
-            Console.WriteLine($"ENCODED: {encodedText}");
+            Console.WriteLine($"ENCODED: {encryptedText}");
 
-            var decodedBytes = algorithm.Decode(encodedBytes);
-            var decodedText = Encoding.Unicode.GetString(decodedBytes);
+            var decryptedBytes = algorithm.Decrypt(encrypted);
+            var decryptedText = Encoding.Unicode.GetString(decryptedBytes);
 
-            Console.WriteLine($"DECODED: {decodedText}");
+            Console.WriteLine($"DECODED: {decryptedText}");
 
             Console.ReadKey();
         }

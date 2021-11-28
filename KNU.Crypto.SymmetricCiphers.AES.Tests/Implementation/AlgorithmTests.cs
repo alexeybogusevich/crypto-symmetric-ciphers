@@ -12,41 +12,41 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Tests.Implementation
         public class AES128
         {
             [TestMethod]
-            public void Encode_AppendixB_EncodedCorrectly()
+            public void Encode_AppendixB_EncryptedCorrectly()
             {
                 // Arrange
                 var cipherBytes = Examples.AppendixB_CipherKey;
                 var algorithm = new Algorithm(cipherBytes);
 
                 var plainBytes = Examples.AppendixB_PlainText;
-                var expectedEncodedBytes = Examples.AppendixB_EncodedText;
+                var expectedEncryptedBytes = Examples.AppendixB_EncryptedText;
 
                 // Act
-                var encodedBytes = algorithm.Encode(plainBytes);
+                var encryptedBytes = algorithm.Encrypt(plainBytes);
 
                 // Assert
-                encodedBytes.Should().BeEquivalentTo(expectedEncodedBytes);
+                encryptedBytes.Should().BeEquivalentTo(expectedEncryptedBytes);
             }
 
             [TestMethod]
-            public void Decode_AppendixB_DecodedCorrectly()
+            public void Decode_AppendixB_DecryptedCorrectly()
             {
                 // Arrange
                 var cipherBytes = Examples.AppendixB_CipherKey;
                 var algorithm = new Algorithm(cipherBytes);
 
-                var encodedBytes = Examples.AppendixB_EncodedText;
-                var expectedDecodedBytes = Examples.AppendixB_PlainText;
+                var encryptedBytes = Examples.AppendixB_EncryptedText;
+                var expectedDecryptedBytes = Examples.AppendixB_PlainText;
 
                 // Act
-                var decodedBytes = algorithm.Decode(encodedBytes);
+                var decryptedBytes = algorithm.Decrypt(encryptedBytes);
 
                 // Assert
-                decodedBytes.Should().BeEquivalentTo(expectedDecodedBytes);
+                decryptedBytes.Should().BeEquivalentTo(expectedDecryptedBytes);
             }
 
             [TestMethod]
-            public void EncodeDecode_AppendixB_EncodedDecodedMatch()
+            public void EncodeDecode_AppendixB_EncryptedDecryptedMatch()
             {
                 // Arrange
                 var cipherBytes = Examples.AppendixB_CipherKey;
@@ -55,49 +55,49 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Tests.Implementation
                 var plainBytes = Examples.AppendixB_PlainText;
 
                 // Act
-                var encodedBytes = algorithm.Encode(plainBytes);
-                var decodedBytes = algorithm.Decode(encodedBytes);
+                var encryptedBytes = algorithm.Encrypt(plainBytes);
+                var decryptedBytes = algorithm.Decrypt(encryptedBytes);
 
                 // Assert
-                decodedBytes.Should().BeEquivalentTo(plainBytes);
+                decryptedBytes.Should().BeEquivalentTo(plainBytes);
             }
 
             [TestMethod]
-            public void Encode_AppendixC1_EncodedCorrectly()
+            public void Encode_AppendixC1_EncryptedCorrectly()
             {
                 // Arrange
                 var cipherBytes = Examples.AppendixC1_CipherKey;
                 var algorithm = new Algorithm(cipherBytes);
 
                 var plainBytes = Examples.AppendixC1_PlainText;
-                var expectedEncodedBytes = Examples.AppendixC1_EncodedText;
+                var expectedEncryptedBytes = Examples.AppendixC1_EncryptedText;
 
                 // Act
-                var encodedBytes = algorithm.Encode(plainBytes);
+                var encryptedBytes = algorithm.Encrypt(plainBytes);
 
                 // Assert
-                encodedBytes.Should().BeEquivalentTo(expectedEncodedBytes);
+                encryptedBytes.Should().BeEquivalentTo(expectedEncryptedBytes);
             }
 
             [TestMethod]
-            public void Decode_AppendixC1_DecodedCorrectly()
+            public void Decode_AppendixC1_DecryptedCorrectly()
             {
                 // Arrange
                 var cipherBytes = Examples.AppendixC1_CipherKey;
                 var algorithm = new Algorithm(cipherBytes);
 
-                var encodedBytes = Examples.AppendixC1_EncodedText;
-                var expectedDecodedBytes = Examples.AppendixC1_PlainText;
+                var encryptedBytes = Examples.AppendixC1_EncryptedText;
+                var expectedDecryptedBytes = Examples.AppendixC1_PlainText;
 
                 // Act
-                var decodedBytes = algorithm.Decode(encodedBytes);
+                var decryptedBytes = algorithm.Decrypt(encryptedBytes);
 
                 // Assert
-                decodedBytes.Should().BeEquivalentTo(expectedDecodedBytes);
+                decryptedBytes.Should().BeEquivalentTo(expectedDecryptedBytes);
             }
 
             [TestMethod]
-            public void EncodeDecode_AppendixC1_EncodedDecodedMatch()
+            public void EncodeDecode_AppendixC1_EncryptedDecryptedMatch()
             {
                 // Arrange
                 var cipherBytes = Examples.AppendixC1_CipherKey;
@@ -106,11 +106,11 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Tests.Implementation
                 var plainBytes = Examples.AppendixC1_PlainText;
 
                 // Act
-                var encodedBytes = algorithm.Encode(plainBytes);
-                var decodedBytes = algorithm.Decode(encodedBytes);
+                var encryptedBytes = algorithm.Encrypt(plainBytes);
+                var decryptedBytes = algorithm.Decrypt(encryptedBytes);
 
                 // Assert
-                decodedBytes.Should().BeEquivalentTo(plainBytes);
+                decryptedBytes.Should().BeEquivalentTo(plainBytes);
             }
         }
 
@@ -118,41 +118,41 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Tests.Implementation
         public class AES192
         {
             [TestMethod]
-            public void Encode_AppendixC2_EncodedCorrectly()
+            public void Encode_AppendixC2_EncryptedCorrectly()
             {
                 // Arrange
                 var cipherBytes = Examples.AppendixC2_CipherKey;
                 var algorithm = new Algorithm(cipherBytes);
 
                 var plainBytes = Examples.AppendixC2_PlainText;
-                var expectedEncodedBytes = Examples.AppendixC2_EncodedText;
+                var expectedEncryptedBytes = Examples.AppendixC2_EncryptedText;
 
                 // Act
-                var encodedBytes = algorithm.Encode(plainBytes);
+                var encryptedBytes = algorithm.Encrypt(plainBytes);
 
                 // Assert
-                encodedBytes.Should().BeEquivalentTo(expectedEncodedBytes);
+                encryptedBytes.Should().BeEquivalentTo(expectedEncryptedBytes);
             }
 
             [TestMethod]
-            public void Decode_AppendixC2_DecodedCorrectly()
+            public void Decode_AppendixC2_DecryptedCorrectly()
             {
                 // Arrange
                 var cipherBytes = Examples.AppendixC2_CipherKey;
                 var algorithm = new Algorithm(cipherBytes);
 
-                var encodedBytes = Examples.AppendixC2_EncodedText;
-                var expectedDecodedBytes = Examples.AppendixC2_PlainText;
+                var encryptedBytes = Examples.AppendixC2_EncryptedText;
+                var expectedDecryptedBytes = Examples.AppendixC2_PlainText;
 
                 // Act
-                var decodedBytes = algorithm.Decode(encodedBytes);
+                var decryptedBytes = algorithm.Decrypt(encryptedBytes);
 
                 // Assert
-                decodedBytes.Should().BeEquivalentTo(expectedDecodedBytes);
+                decryptedBytes.Should().BeEquivalentTo(expectedDecryptedBytes);
             }
 
             [TestMethod]
-            public void EncodeDecode_AppendixC2_EncodedDecodedMatch()
+            public void EncodeDecode_AppendixC2_EncryptedDecryptedMatch()
             {
                 // Arrange
                 var cipherBytes = Examples.AppendixC2_CipherKey;
@@ -161,11 +161,11 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Tests.Implementation
                 var plainBytes = Examples.AppendixC2_PlainText;
 
                 // Act
-                var encodedBytes = algorithm.Encode(plainBytes);
-                var decodedBytes = algorithm.Decode(encodedBytes);
+                var encryptedBytes = algorithm.Encrypt(plainBytes);
+                var decryptedBytes = algorithm.Decrypt(encryptedBytes);
 
                 // Assert
-                decodedBytes.Should().BeEquivalentTo(plainBytes);
+                decryptedBytes.Should().BeEquivalentTo(plainBytes);
             }
         }
 
@@ -173,41 +173,41 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Tests.Implementation
         public class AES256
         {
             [TestMethod]
-            public void Encode_AppendixC3_EncodedCorrectly()
+            public void Encode_AppendixC3_EncryptedCorrectly()
             {
                 // Arrange
                 var cipherBytes = Examples.AppendixC3_CipherKey;
                 var algorithm = new Algorithm(cipherBytes);
 
                 var plainBytes = Examples.AppendixC3_PlainText;
-                var expectedEncodedBytes = Examples.AppendixC3_EncodedText;
+                var expectedEncryptedBytes = Examples.AppendixC3_EncryptedText;
 
                 // Act
-                var encodedBytes = algorithm.Encode(plainBytes);
+                var encryptedBytes = algorithm.Encrypt(plainBytes);
 
                 // Assert
-                encodedBytes.Should().BeEquivalentTo(expectedEncodedBytes);
+                encryptedBytes.Should().BeEquivalentTo(expectedEncryptedBytes);
             }
 
             [TestMethod]
-            public void Decode_AppendixC3_DecodedCorrectly()
+            public void Decode_AppendixC3_DecryptedCorrectly()
             {
                 // Arrange
                 var cipherBytes = Examples.AppendixC3_CipherKey;
                 var algorithm = new Algorithm(cipherBytes);
 
-                var encodedBytes = Examples.AppendixC3_EncodedText;
-                var expectedDecodedBytes = Examples.AppendixC3_PlainText;
+                var encryptedBytes = Examples.AppendixC3_EncryptedText;
+                var expectedDecryptedBytes = Examples.AppendixC3_PlainText;
 
                 // Act
-                var decodedBytes = algorithm.Decode(encodedBytes);
+                var decryptedBytes = algorithm.Decrypt(encryptedBytes);
 
                 // Assert
-                decodedBytes.Should().BeEquivalentTo(expectedDecodedBytes);
+                decryptedBytes.Should().BeEquivalentTo(expectedDecryptedBytes);
             }
 
             [TestMethod]
-            public void EncodeDecode_AppendixC3_EncodedDecodedMatch()
+            public void EncodeDecode_AppendixC3_EncryptedDecryptedMatch()
             {
                 // Arrange
                 var cipherBytes = Examples.AppendixC3_CipherKey;
@@ -216,11 +216,11 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Tests.Implementation
                 var plainBytes = Examples.AppendixC3_PlainText;
 
                 // Act
-                var encodedBytes = algorithm.Encode(plainBytes);
-                var decodedBytes = algorithm.Decode(encodedBytes);
+                var encryptedBytes = algorithm.Encrypt(plainBytes);
+                var decryptedBytes = algorithm.Decrypt(encryptedBytes);
 
                 // Assert
-                decodedBytes.Should().BeEquivalentTo(plainBytes);
+                decryptedBytes.Should().BeEquivalentTo(plainBytes);
             }
         }
     }

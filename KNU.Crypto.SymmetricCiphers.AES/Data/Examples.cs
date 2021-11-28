@@ -26,7 +26,7 @@
             0xe0, 0x37, 0x07, 0x34
         };
 
-        public static byte[] AppendixB_EncodedText => new byte[]
+        public static byte[] AppendixB_EncryptedText => new byte[]
         {
             0x39, 0x25, 0x84, 0x1d,
             0x02, 0xdc, 0x09, 0xfb,
@@ -42,7 +42,7 @@
             0x0c, 0x0d, 0x0e, 0x0f
         };
 
-        public static byte[] AppendixC1_EncodedText => new byte[]
+        public static byte[] AppendixC1_EncryptedText => new byte[]
         {
             0x69, 0xc4, 0xe0, 0xd8,
             0x6a, 0x7b, 0x04, 0x30,
@@ -74,7 +74,7 @@
             0xcc, 0xdd, 0xee, 0xff
         };
 
-        public static byte[] AppendixC2_EncodedText => new byte[]
+        public static byte[] AppendixC2_EncryptedText => new byte[]
         {
             0xdd, 0xa9, 0x7c, 0xa4,
             0x86, 0x4c, 0xdf, 0xe0,
@@ -98,7 +98,7 @@
             0xcc, 0xdd, 0xee, 0xff
         };
 
-        public static byte[] AppendixC3_EncodedText => new byte[]
+        public static byte[] AppendixC3_EncryptedText => new byte[]
         {
             0x8e, 0xa2, 0xb7, 0xca, 
             0x51, 0x67, 0x45, 0xbf, 

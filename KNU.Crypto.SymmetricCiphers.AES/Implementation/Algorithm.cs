@@ -61,7 +61,7 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Implementation
             KeyExpansion(key);
         }
 
-        public byte[] Encode(byte[] plainBytes)
+        public byte[] Encrypt(byte[] plainBytes)
         {
             var state = new State(plainBytes, 4, Nb);
             Console.WriteLine(state);
@@ -104,7 +104,7 @@ namespace KNU.Crypto.SymmetricCiphers.AES.Implementation
             return state.ToByteArray();
         }
 
-        public byte[] Decode(byte[] cipherBytes)
+        public byte[] Decrypt(byte[] cipherBytes)
         {
             var state = new State(cipherBytes, 4, Nb);
             Console.WriteLine(state);
