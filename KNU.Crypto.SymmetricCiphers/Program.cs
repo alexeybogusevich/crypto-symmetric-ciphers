@@ -1,6 +1,6 @@
-﻿using KNU.Crypto.SymmetricCiphers.AES.Implementation;
+﻿using KNU.Crypto.SymmetricCiphers.Common.Services;
+using KNU.Crypto.SymmetricCiphers.AES.Implementation;
 using KNU.Crypto.SymmetricCiphers.AES.Parameters;
-using KNU.Crypto.SymmetricCiphers.Common.Services;
 using System;
 using System.Text;
 

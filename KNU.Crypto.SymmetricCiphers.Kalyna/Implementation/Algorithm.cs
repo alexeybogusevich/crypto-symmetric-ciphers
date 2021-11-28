@@ -1,13 +1,26 @@
-﻿using KNU.Crypto.SymmetricCiphers.Kalyna.Data;
+﻿using KNU.Crypto.SymmetricCiphers.Common.Interfaces;
+using KNU.Crypto.SymmetricCiphers.Kalyna.Data;
 using System.Collections.Generic;
 
 namespace KNU.Crypto.SymmetricCiphers.Kalyna.Implementation
 {
-    public class Algorithm
+    public class Algorithm : IAlgorithm
     {
+        /// <summary>
+        /// Cipher Key.
+        /// </summary>
+        private readonly byte[] cipherKey;
+
         private List<State> RoundKeys { get; } = new List<State>();
 
-        public byte[] Encrypt(byte[] plainBytes, byte[] cipherKey)
+
+        public Algorithm(byte[] key)
+        {
+            this.cipherKey = key;
+        }
+
+
+        public byte[] Encrypt(byte[] plainBytes)
         {
             if (RoundKeys.Count == 0)
                 KeyExpansion(cipherKey);
@@ -31,7 +44,7 @@ namespace KNU.Crypto.SymmetricCiphers.Kalyna.Implementation
             return state.Bytes.ToArray();
         }
 
-        public byte[] Decrypt(byte[] plainBytes, byte[] cipherKey)
+        public byte[] Decrypt(byte[] plainBytes)
         {
             if (RoundKeys.Count == 0)
                 KeyExpansion(cipherKey);
@@ -69,25 +82,19 @@ namespace KNU.Crypto.SymmetricCiphers.Kalyna.Implementation
             kt.AddRoundKey(key);
 
             kt.SubBytes(Tables.Π);
-
             kt.ShiftRows();
-
             kt.MixColumns(Tables.Mds);
 
             kt.Xor(key);
 
             kt.SubBytes(Tables.Π);
-
             kt.ShiftRows();
-
             kt.MixColumns(Tables.Mds);
 
             kt.AddRoundKey(key);
 
             kt.SubBytes(Tables.Π);
-
             kt.ShiftRows();
-
             kt.MixColumns(Tables.Mds);
 
             return kt;

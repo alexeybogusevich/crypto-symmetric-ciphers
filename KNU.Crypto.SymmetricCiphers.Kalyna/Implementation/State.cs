@@ -96,23 +96,6 @@ namespace KNU.Crypto.SymmetricCiphers.Kalyna.Implementation
                 ShiftBytesPair(i - 8, i);
         }
 
-        private static byte Gmul(int a, int b)
-        {
-            byte p = 0; /* the product of the multiplication */
-            while (b != 0)
-            {
-                if ((b & 1) == 1) /* if b is odd, then add the corresponding a to p (final product = sum of all a's corresponding to odd b's) */
-                    p ^= (byte)a; /* since we're in GF(2^m), addition is an XOR */
-
-                if ((a & 0x80) == 0x80) /* GF modulo: if a >= 128, then it will overflow when shifted left, so reduce */
-                    a = (a << 1) ^ 0x11d; /* XOR with the primitive polynomial x^8 + x^4 + x^3 + x + 1 (0b1_0001_1011) -- you can change it but it must be irreducible */
-                else
-                    a <<= 1; /* equivalent to a*2 */
-                b >>= 1; /* equivalent to b // 2 */
-            }
-            return p;
-        }
-
         public void MixColumns(byte[][] table)
         {
             var dataCopy = new List<byte>(Bytes);
@@ -150,6 +133,23 @@ namespace KNU.Crypto.SymmetricCiphers.Kalyna.Implementation
         {
             for (var i = 0; i < Bytes.Count; i++)
                 Bytes[i] ^= bytes.ElementAt(i);
+        }
+
+        private static byte Gmul(int a, int b)
+        {
+            byte p = 0; /* the product of the multiplication */
+            while (b != 0)
+            {
+                if ((b & 1) == 1) /* if b is odd, then add the corresponding a to p (final product = sum of all a's corresponding to odd b's) */
+                    p ^= (byte)a; /* since we're in GF(2^m), addition is an XOR */
+
+                if ((a & 0x80) == 0x80) /* GF modulo: if a >= 128, then it will overflow when shifted left, so reduce */
+                    a = (a << 1) ^ 0x11d; /* XOR with the primitive polynomial x^8 + x^4 + x^3 + x + 1 (0b1_0001_1011) -- you can change it but it must be irreducible */
+                else
+                    a <<= 1; /* equivalent to a*2 */
+                b >>= 1; /* equivalent to b // 2 */
+            }
+            return p;
         }
     }
 }
