@@ -76,7 +76,7 @@ public enum KeySize
 ```
 var algorithm = new Algorithm(cipherBytes);
 
-var encrypted = algorithm.Encrypt(plainBytes);
+var encryptedBytes = algorithm.Encrypt(plainBytes);
 
 var decryptedBytes = algorithm.Decrypt(encrypted);
 ```
