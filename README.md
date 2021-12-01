@@ -88,7 +88,7 @@ var decryptedBytes = algorithm.Decrypt(encrypted);
 |    AESEncrypt |         30.15 us |         0.198 us |         0.175 us |
 | KalynaEncrypt |         42.76 us |         0.217 us |         0.412 us |
 |    AESDecrypt |         54.13 us |         0.391 us |         0.347 us |
-| KalynaDecrypt |        121.39 us |         0.274 us |         0.472 us |
+| KalynaDecrypt |         71.39 us |         0.274 us |         0.472 us |
 
 BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19044.1348 (21H2) \
 AMD Ryzen 7 5700U with Radeon Graphics, 1 CPU, 16 logical and 8 physical cores \
