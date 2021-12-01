@@ -90,8 +90,8 @@ var decryptedBytes = algorithm.Decrypt(encrypted);
 |    AESDecrypt |         54.13 us |         0.391 us |         0.347 us |
 | KalynaDecrypt | 69,843,064.00 us | 1,369,754.849 us | 1,345,282.414 us |
 
-BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19044.1348 (21H2)
-AMD Ryzen 7 5700U with Radeon Graphics, 1 CPU, 16 logical and 8 physical cores
-.NET SDK=6.0.100
-  [Host]     : .NET Core 3.1.21 (CoreCLR 4.700.21.51404, CoreFX 4.700.21.51508), X64 RyuJIT
-  DefaultJob : .NET Core 3.1.21 (CoreCLR 4.700.21.51404, CoreFX 4.700.21.51508), X64 RyuJIT
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19044.1348 (21H2) \
+AMD Ryzen 7 5700U with Radeon Graphics, 1 CPU, 16 logical and 8 physical cores \
+.NET SDK=6.0.100 \
+  [Host]     : .NET Core 3.1.21 (CoreCLR 4.700.21.51404, CoreFX 4.700.21.51508), X64 RyuJIT \
+  DefaultJob : .NET Core 3.1.21 (CoreCLR 4.700.21.51404, CoreFX 4.700.21.51508), X64 RyuJIT 
