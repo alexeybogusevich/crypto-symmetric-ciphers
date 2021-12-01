@@ -86,9 +86,9 @@ var decryptedBytes = algorithm.Decrypt(encrypted);
 |        Method |             Mean |            Error |           StdDev |
 |-------------- |-----------------:|-----------------:|-----------------:|
 |    AESEncrypt |         30.15 us |         0.198 us |         0.175 us |
-| KalynaEncrypt | 30,938,915.76 us |   612,274.856 us |   542,765.712 us |
+| KalynaEncrypt |         42.76 us |         0.217 us |         0.412 us |
 |    AESDecrypt |         54.13 us |         0.391 us |         0.347 us |
-| KalynaDecrypt | 69,843,064.00 us | 1,369,754.849 us | 1,345,282.414 us |
+| KalynaDecrypt |        121.39 us |         0.274 us |         0.472 us |
 
 BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19044.1348 (21H2) \
 AMD Ryzen 7 5700U with Radeon Graphics, 1 CPU, 16 logical and 8 physical cores \
