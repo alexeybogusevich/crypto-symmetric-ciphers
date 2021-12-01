@@ -95,3 +95,5 @@ AMD Ryzen 7 5700U with Radeon Graphics, 1 CPU, 16 logical and 8 physical cores \
 .NET SDK=6.0.100 \
   [Host]     : .NET Core 3.1.21 (CoreCLR 4.700.21.51404, CoreFX 4.700.21.51508), X64 RyuJIT \
   DefaultJob : .NET Core 3.1.21 (CoreCLR 4.700.21.51404, CoreFX 4.700.21.51508), X64 RyuJIT 
+  
+File: 1 GB
